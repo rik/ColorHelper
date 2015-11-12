@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User Guide - ColorHelper</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_custom.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> ColorHelper</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">About Markdown Popups</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../installation/">Installation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">User Guide</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#user-guide">User Guide</a></li>
+                
+                    <li><a class="toctree-l4" href="#general-usage">General Usage</a></li>
+                
+                    <li><a class="toctree-l4" href="#color-info">Color Info</a></li>
+                
+                    <li><a class="toctree-l4" href="#add-color-panel">Add Color Panel</a></li>
+                
+                    <li><a class="toctree-l4" href="#palette-panel">Palette Panel</a></li>
+                
+                    <li><a class="toctree-l4" href="#palette-delete-panel">Palette Delete Panel</a></li>
+                
+                    <li><a class="toctree-l4" href="#color-panel">Color Panel</a></li>
+                
+                    <li><a class="toctree-l4" href="#color-delete-panel">Color Delete Panel</a></li>
+                
+                    <li><a class="toctree-l4" href="#settings">Settings</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../contributing/">Contributing &amp; Support</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../license/">License</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">ColorHelper</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>User Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/facelessuser/ColorHelper" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 class="doctitle" id="user-guide"><a name="user-content-user-guide" href="#user-guide" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>User Guide</h1>
+<p>Configuration and usage of ColorHelper.</p>
+<hr />
+<h2 id="general-usage"><a name="user-content-general-usage" href="#general-usage" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>General Usage</h2>
+<p>ColorHelper is a CSS/SCSS/Sass tooltip.  When the cursor is on a CSS color, the tooltip will appear. When entering a color into a supported file, the color palette panel will be triggered so you can optionally insert a color from a saved palette.  The panel will popup after either: <code>#</code>, <code>rgb(</code>, <code>rgba(</code>, <code>hsl(</code> or <code>hsla(</code>.</p>
+<h2 id="color-info"><a name="user-content-color-info" href="#color-info" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Color Info</h2>
+<p>The Color Info Panel will show a preview of the color, and other format variations of the color such as: color name, hex, rgb, rgba, hsl, and hsla format; if desired, you can convert the selected color to one of the shown formats by clicking the link to the left.</p>
+<p><img alt="color_info" src="../images/color_info.png" /></p>
+<p>From the color info panel, you can launch the <a href="https://github.com/weslly/ColorPicker">ColorPicker</a> plugin (if available), bookmark colors as a favorite, add/save the current color to a palette of your choice, or open the <a href="#palette-panel">Palette Panel</a> to select a pre-saved color from an exiting palette.</p>
+<h2 id="add-color-panel"><a name="user-content-add-color-panel" href="#add-color-panel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Add Color Panel</h2>
+<p>The Add Color Panel presents the user with the option of either adding a color to an existing palette or creating a new global or project palette and adding the color to it.</p>
+<p><img alt="add color palette" src="../images/add_color.png" /></p>
+<p>When creating a new palette, the user will be presented with a input box to type the name of the palette to create.</p>
+<h2 id="palette-panel"><a name="user-content-palette-panel" href="#palette-panel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Palette Panel</h2>
+<p>The Palette panel will allow you to view the current saved palettes: favorites, saved user palette, and saved project palettes.</p>
+<p><img alt="palettes" src="../images/palettes.png" /></p>
+<p>The Favorites palette and user palettes are found in your <code>Packages/User/color_helper.palettes</code>.  Project palettes are stored in your actual project file; if one does not exist, it will be stored in memory.</p>
+<p>By clicking a palette, you will be taken to the <a href="#color-panel">Color Panel</a> to select a color to insert into the current document.  You can also access the <a href="#palette-delete-panel">Palette Delete Panel</a> directly.</p>
+<h2 id="palette-delete-panel"><a name="user-content-palette-delete-panel" href="#palette-delete-panel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Palette Delete Panel</h2>
+<p>The Palette Delete Panel allows a user to delete an existing palette.  The only palettes that cannot be deleted is the Favorites palette and the Current Colors palette (if enabled).</p>
+<p><img alt="delete palette" src="../images/delete_palette.png" /></p>
+<p>To delete a palette, a user simply clicks a palette and it will be removed.</p>
+<h2 id="color-panel"><a name="user-content-color-panel" href="#color-panel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Color Panel</h2>
+<p>The Color Panel allows you to click a color to insert it at your current color position.</p>
+<p><img alt="color palette" src="../images/colors.png" /></p>
+<p>From the Color Palette, you can also bring up the <a href="#color-delete-panel">Color Delete Panel</a>.</p>
+<h2 id="color-delete-panel"><a name="user-content-color-delete-panel" href="#color-delete-panel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Color Delete Panel</h2>
+<p>The Color Delete Panel can delete any color from the given palette.  A user simply clicks the color to remove, and it will be removed.</p>
+<p><img alt="color delete palette" src="../images/delete_color.png" /></p>
+<h2 id="settings"><a name="user-content-settings" href="#settings" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Settings</h2>
+<p>Settings for Color Helper are contained within the <code>color_helper.sublime-settings</code> file.</p>
+<h3 id="upper_case_hex"><a name="user-content-upper_case_hex" href="#upper_case_hex" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>upper_case_hex</h3>
+<p>When inserting a color from the tooltip, this setting will determine if hex colors get uppercased or lowercased.</p>
+<div class="codehilite"><pre>    <span class="c1">// Upper case hex when inserting</span>
+    <span class="s2">&quot;upper_case_hex&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="use_webcolor_names"><a name="user-content-use_webcolor_names" href="#use_webcolor_names" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>use_webcolor_names</h3>
+<p>Will determine if a HTML color name will be shown for the currently selected colors. If inserting a web color name, transparency will be removed.</p>
+<div class="codehilite"><pre>    <span class="c1">// Use webcolor names when value color matches a webcolor name.</span>
+    <span class="s2">&quot;use_webcolor_names&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="preferred_format"><a name="user-content-preferred_format" href="#preferred_format" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>preferred_format</h3>
+<p>Controls color format that will be inserted into your document when selecting a color from a palette.  This will only affect colors that contain <strong>no</strong> transparency.</p>
+<div class="codehilite"><pre>    <span class="c1">// Preferred format to output color as:</span>
+    <span class="c1">// (none|hex|rgb|hsl)</span>
+    <span class="s2">&quot;preferred_format&quot;</span><span class="o">:</span> <span class="s2">&quot;hex&quot;</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="preferred_alpha_format"><a name="user-content-preferred_alpha_format" href="#preferred_alpha_format" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>preferred_alpha_format</h3>
+<p>Controls color format that will be inserted into your document when selecting a color from a palette.  This will only affect colors <strong>with</strong> transparency.</p>
+<div class="codehilite"><pre>    <span class="c1">// Preferred alpha format to output color as:</span>
+    <span class="c1">// (none|rgba|hsla)</span>
+    <span class="s2">&quot;preferred_alpha_format&quot;</span><span class="o">:</span> <span class="s2">&quot;rgba&quot;</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="click_color_box_to_pick"><a name="user-content-click_color_box_to_pick" href="#click_color_box_to_pick" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>click_color_box_to_pick</h3>
+<p>This will make the color preview box in the <a href="#color-info-panel">Color Info Panel</a> clickable.  When set to <code>color_picker</code> and clicked, it will open the color picker via the <a href="https://github.com/weslly/ColorPicker">ColorPicker</a> plugin (if installed).  When set to <code>palette_picker</code> and clicked, it will open the <a href="#palette-panel">Palette Panel</a>. The respective menu item will not be shown in the <a href="#color-info-panel">Color Info Panel</a> once relocated to the color preview.</p>
+<div class="codehilite"><pre>    <span class="c1">// Color picker and palette picker by default</span>
+    <span class="c1">// are accessed by clicking an icon on the color info panel.</span>
+    <span class="c1">// Click access for one of thesecan be moved to the color box</span>
+    <span class="c1">// (visual representation of the color).</span>
+    <span class="c1">// (none|color_picker|palette_picker)</span>
+    <span class="s2">&quot;click_color_box_to_pick&quot;</span><span class="o">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="enable_color_picker"><a name="user-content-enable_color_picker" href="#enable_color_picker" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>enable_color_picker</h3>
+<p>Enables the ability to launch the color picker from the tooltip.</p>
+<div class="codehilite"><pre>    <span class="c1">// Enable color picker option if ColorPicker plugin is installed</span>
+    <span class="s2">&quot;enable_color_picker&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="enable_global_user_palettes"><a name="user-content-enable_global_user_palettes" href="#enable_global_user_palettes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>enable_global_user_palettes</h3>
+<p>Enables showing user palettes (found in <code>Packages/User/color_helper.palettes</code>) in the <a href="#palette-panel">Palette Panel</a>.</p>
+<div class="codehilite"><pre>    <span class="c1">// Show global palettes in palette panel</span>
+    <span class="s2">&quot;enable_global_user_palettes&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="enable_favorite_palette"><a name="user-content-enable_favorite_palette" href="#enable_favorite_palette" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>enable_favorite_palette</h3>
+<p>Enables showing the Favorites palette (found in <code>Packages/User/color_helper.palettes</code>) in the <a href="#palette-panel">Palette Panel</a>.</p>
+<div class="codehilite"><pre>    <span class="c1">// Enable storing favorite colors to the favorite palette</span>
+    <span class="s2">&quot;enable_favorite_palette&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="enable_current_file_palette"><a name="user-content-enable_current_file_palette" href="#enable_current_file_palette" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>enable_current_file_palette</h3>
+<p>Enables scanning of the current active view buffer for colors and showing them in the Current Colors palette in the <a href="#palette-panel">Palette Panel</a>.</p>
+<div class="codehilite"><pre>    <span class="c1">// Enable showing current file color palette</span>
+    <span class="s2">&quot;enable_current_file_palette&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="enable_project_user_palettes"><a name="user-content-enable_project_user_palettes" href="#enable_project_user_palettes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>enable_project_user_palettes</h3>
+<p>Enables showing and storing of user palettes in the project file.  Project palettes will be shown in the <a href="#palette-panel">Palette Panel</a>.</p>
+<div class="codehilite"><pre>    <span class="c1">// Enable project palettes in palette panel (Palettes stored in project file).</span>
+    <span class="s2">&quot;enable_project_user_palettes&quot;</span><span class="o">:</span> <span class="kc">true</span>
+</pre></div>
+
+
+<h3 id="enable_color_conversions"><a name="user-content-enable_color_conversions" href="#enable_color_conversions" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>enable_color_conversions</h3>
+<p>Enables showing the color conversion options on the <a href="#color-info-panel">Color Info Panel</a>.</p>
+<div class="codehilite"><pre>    <span class="c1">// Enable color conversion options on color info panel</span>
+    <span class="s2">&quot;enable_color_conversions&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="supported_syntax"><a name="user-content-supported_syntax" href="#supported_syntax" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>supported_syntax</h3>
+<p><code>supported_syntax</code> is a list of scope rules that will be scanned when <a href="#enable_current_file_palette">enable_current_file_palette</a> is enabled.  If a color is found within these scope rules, it will be indexed for the current file and shown in the Current Colors Panel in the <a href="#palette-panel">Palette Panel</a>.</p>
+<div class="codehilite"><pre>    <span class="c1">// File scoping that will be used when indexing colors in an opened or saved file.</span>
+    <span class="c1">// These are the syntaxes which the auto popup tooltip uses to recogize scannable regions.</span>
+    <span class="s2">&quot;supported_syntax&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">&quot;meta.property-value.css -comment -string&quot;</span><span class="p">,</span>          <span class="c1">// CSS, CSS in HTML etc. (based on: Sublime Default)</span>
+        <span class="s2">&quot;meta.value.css -comment -string&quot;</span><span class="p">,</span>                   <span class="c1">// CSS3, CSS3 in HTML etc. (based on: https://packagecontrol.io/packages/CSS3)</span>
+        <span class="s2">&quot;meta.property-list.css.sass -comment -string&quot;</span><span class="p">,</span>      <span class="c1">// Sass and SCSS (based on: https://packagecontrol.io/packages/Syntax%20Highlighting%20for%20Sass)</span>
+        <span class="s2">&quot;sass-script-maps -variable.other -comment -string&quot;</span><span class="p">,</span> <span class="c1">// Sass and SCSS script maps (based on: https://packagecontrol.io/packages/Syntax%20Highlighting%20for%20Sass)</span>
+        <span class="s2">&quot;meta.tag.inline.any.html string.quoted&quot;</span>             <span class="c1">// HTML attributes (based on: Sublime Default)</span>
+    <span class="p">],</span>
+</pre></div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../contributing/" class="btn btn-neutral float-right" title="Contributing &amp; Support"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../installation/" class="btn btn-neutral" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    
+    Copyright &copy; 2015 <a href="https://github.com/facelessuser">Isaac Muse</a>
+    
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../installation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../contributing/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
