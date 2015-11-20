@@ -69,6 +69,8 @@
                 
                     <li><a class="toctree-l4" href="#color-info">Color Info</a></li>
                 
+                    <li><a class="toctree-l4" href="#color-picker">Color Picker</a></li>
+                
                     <li><a class="toctree-l4" href="#add-color-panel">Add Color Panel</a></li>
                 
                     <li><a class="toctree-l4" href="#palette-panel">Palette Panel</a></li>
@@ -144,8 +146,14 @@
 <p>ColorHelper is a CSS/SCSS/Sass tooltip.  When the cursor is on a CSS color, the tooltip will appear. When entering a color into a supported file, the color palette panel will be triggered so you can optionally insert a color from a saved palette.  The panel will popup after either: <code>#</code>, <code>rgb(</code>, <code>rgba(</code>, <code>hsl(</code> or <code>hsla(</code>.</p>
 <h2 id="color-info"><a name="user-content-color-info" href="#color-info" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Color Info</h2>
 <p>The Color Info Panel will show a preview of the color, and other format variations of the color such as: color name, hex, rgb, rgba, hsl, and hsla format; if desired, you can convert the selected color to one of the shown formats by clicking the link to the left.</p>
-<p><img alt="color_info" src="../images/color_info.png" /></p>
-<p>From the color info panel, you can launch the <a href="https://github.com/weslly/ColorPicker">ColorPicker</a> plugin (if available), bookmark colors as a favorite, add/save the current color to a palette of your choice, or open the <a href="#palette-panel">Palette Panel</a> to select a pre-saved color from an exiting palette.</p>
+<p><img alt="color info" src="../images/color_info.png" /></p>
+<p>From the color info panel, you can launch a color picker, bookmark colors as a favorite, add/save the current color to a palette of your choice, or open the <a href="#palette-panel">Palette Panel</a> to select a pre-saved color from an exiting palette.</p>
+<h2 id="color-picker"><a name="user-content-color-picker" href="#color-picker" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Color Picker</h2>
+<p>The internal color picker can be launched from the command palette or from the <a href="#color_info">Color Info Panel</a>.  When launched it will use the color under the cursor (if available) as its starting color. The internal color picker is contained inside a tooltip.  It has a color map section at the top where different colors can be selected. It shows various valid CSS formats of the colors at the bottom.  And it shows either rgba channels or hlsa channels; a toggle is available to switch between them.</p>
+<p><img alt="color picker" src="../images/color_picker.png" /></p>
+<p>The color channels are coarse, but can generally allow you to get close to a color that you like.  As you select colors in the channel the selections will shift revealing more selections until the bounds of the color channel are reached.  If you need finer selections, you can click the label to the left and scrollable tooltip with much finer selections will appear so that you can select the best suited value.</p>
+<p><img alt="fine channel picker" src="../images/fine_channel_picker.png" /></p>
+<p>If you would like to directly enter a different color, you can select the <code>enter new color</code> option.  An input panel will be open that can receive a color in the hex form of <code>#RRGGBBAA</code> where <code>RR</code> is the red channel, <code>GG</code> is the green channel, <code>BB</code> is the blue channel, and <code>AA</code> is the alpha channel.</p>
 <h2 id="add-color-panel"><a name="user-content-add-color-panel" href="#add-color-panel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Add Color Panel</h2>
 <p>The Add Color Panel presents the user with the option of either adding a color to an existing palette or creating a new global or project palette and adding the color to it.</p>
 <p><img alt="add color palette" src="../images/add_color.png" /></p>
@@ -209,10 +217,30 @@
 </pre></div>
 
 
+<h3 id="graphic_size"><a name="user-content-graphic_size" href="#graphic_size" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>graphic_size</h3>
+<p>Controls the size of generated graphics.  Graphics in the tooltips look best large as Sublime slightly distorts images, but on small screens, some of the tooltips (especially the internal color picker) may be too large.  <code>graphic_size</code> can be used ot control the size of these generated images.  Valid settings are <code>small</code>, <code>medium</code>, and <code>large</code> where <code>medium</code> is the default.</p>
+<div class="codehilite"><pre>    <span class="c1">// If the color picker is too big, try playing with this.</span>
+    <span class="c1">// Graphics in tooltips usually look better bigger (especially in Hidpi),</span>
+    <span class="c1">// but that can make the tooltips really big. If they are too big,</span>
+    <span class="c1">// you can play with this setting.  We compromise with medium.</span>
+    <span class="c1">// (small | medium | large)</span>
+    <span class="s2">&quot;graphic_size&quot;</span><span class="o">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span>
+</pre></div>
+
+
 <h3 id="enable_color_picker"><a name="user-content-enable_color_picker" href="#enable_color_picker" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>enable_color_picker</h3>
-<p>Enables the ability to launch the color picker from the tooltip.</p>
-<div class="codehilite"><pre>    <span class="c1">// Enable color picker option if ColorPicker plugin is installed</span>
+<p>Enables the ability to launch the color picker from the tooltip.  By default, the internal color picker will be used.  If you have <a href="https://github.com/weslly">@weslly</a>&lsquo;s <a href="https://packagecontrol.io/packages/ColorPicker">ColorPicker</a> package installed, you can use <a href="#use_color_picker_package">use_color_picker_package</a> to use it instead of the internal color picker.</p>
+<div class="codehilite"><pre>    <span class="c1">// Enable color picker option.  Will use native color picker</span>
+    <span class="c1">// unless &quot;use_color_picker_package&quot; is enabled and external</span>
+    <span class="c1">// package is installed.</span>
     <span class="s2">&quot;enable_color_picker&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</pre></div>
+
+
+<h3 id="use_color_picker_package"><a name="user-content-use_color_picker_package" href="#use_color_picker_package" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>use_color_picker_package</h3>
+<p>If you have <a href="https://github.com/weslly">@weslly</a>&lsquo;s <a href="https://packagecontrol.io/packages/ColorPicker">ColorPicker</a> package installed, <code>user_color_picker_package</code> will cause it to override the default color picker, but only the default color picker supports transparency.</p>
+<div class="codehilite"><pre>    <span class="c1">// Use https://github.com/weslly/ColorPicker for the color picker if installed.</span>
+    <span class="s2">&quot;use_color_picker_package&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 </pre></div>
 
 
