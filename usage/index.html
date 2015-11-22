@@ -153,7 +153,10 @@
 <p><img alt="color picker" src="../images/color_picker.png" /></p>
 <p>The color channels are coarse, but can generally allow you to get close to a color that you like.  As you select colors in the channel the selections will shift revealing more selections until the bounds of the color channel are reached.  If you need finer selections, you can click the label to the left and scrollable tooltip with much finer selections will appear so that you can select the best suited value.</p>
 <p><img alt="fine channel picker" src="../images/fine_channel_picker.png" /></p>
+<p>If you would like to pick from a list of CSS color names, you can select the <code>CSS color names</code> link and a CSS Color Names panel will open:</p>
+<p><img alt="CSS color names" src="../images/css_color_name_panel.png" /></p>
 <p>If you would like to directly enter a different color, you can select the <code>enter new color</code> option.  An input panel will be open that can receive a color in the hex form of <code>#RRGGBBAA</code> where <code>RR</code> is the red channel, <code>GG</code> is the green channel, <code>BB</code> is the blue channel, and <code>AA</code> is the alpha channel.</p>
+<p>To select a color, just click the <code>&gt;&gt;&gt;</code> link to the right of the CSS format yu want.</p>
 <h2 id="add-color-panel"><a name="user-content-add-color-panel" href="#add-color-panel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Add Color Panel</h2>
 <p>The Add Color Panel presents the user with the option of either adding a color to an existing palette or creating a new global or project palette and adding the color to it.</p>
 <p><img alt="add color palette" src="../images/add_color.png" /></p>
@@ -237,6 +240,18 @@
 </pre></div>
 
 
+<h3 id="use_hex_color_picker"><a name="user-content-use_hex_color_picker" href="#use_hex_color_picker" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>use_hex_color_picker</h3>
+<p>Enables or disables the use of the hex color picker.  When enabled, the color picker has a hex shape as the colors fan out from the white center.  If disabled, the color picker will be a rectangular one that shows the colors by hue and by brightness.</p>
+<div class="codehilite"><pre>    <span class="c1">// This can be turned off to get a rectangular color picker</span>
+    <span class="c1">// That displays possible options by hue and brightness/luminance.</span>
+    <span class="s2">&quot;use_hex_color_picker&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</pre></div>
+
+
+<dl>
+<dt>Disabled look</dt>
+<dd><img alt="alternate color picker" src="../images/alternate_color_picker.png" /></dd>
+</dl>
 <h3 id="use_color_picker_package"><a name="user-content-use_color_picker_package" href="#use_color_picker_package" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>use_color_picker_package</h3>
 <p>If you have <a href="https://github.com/weslly">@weslly</a>&lsquo;s <a href="https://packagecontrol.io/packages/ColorPicker">ColorPicker</a> package installed, <code>user_color_picker_package</code> will cause it to override the default color picker, but only the default color picker supports transparency.</p>
 <div class="codehilite"><pre>    <span class="c1">// Use https://github.com/weslly/ColorPicker for the color picker if installed.</span>
