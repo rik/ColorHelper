@@ -144,12 +144,16 @@
 <hr />
 <h2 id="general-usage"><a name="user-content-general-usage" href="#general-usage" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>General Usage</h2>
 <p>ColorHelper is a CSS/SCSS/Sass tooltip.  When the cursor is on a CSS color, the tooltip will appear. When entering a color into a supported file, the color palette panel will be triggered so you can optionally insert a color from a saved palette.  The panel will popup after either: <code>#</code>, <code>rgb(</code>, <code>rgba(</code>, <code>hsl(</code> or <code>hsla(</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Popups are provided by the <a href="https://github.com/facelessuser/sublime-markdown-popups"><code>mdpopups</code></a> dependency.</p>
+</div>
 <h2 id="color-info"><a name="user-content-color-info" href="#color-info" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Color Info</h2>
 <p>The Color Info Panel will show a preview of the color, and other format variations of the color such as: color name, hex, rgb, rgba, hsl, and hsla format; if desired, you can convert the selected color to one of the shown formats by clicking the link to the left.</p>
 <p><img alt="color info" src="../images/color_info.png" /></p>
-<p>From the color info panel, you can launch a color picker, bookmark colors as a favorite, add/save the current color to a palette of your choice, or open the <a href="#palette-panel">Palette Panel</a> to select a pre-saved color from an exiting palette.</p>
+<p>From the color info panel, you can launch a color picker, bookmark colors as a favorite, add/save the current color to a palette of your choice, or open the <a href="#palette-panel">Palette Panel</a> to select a pre-saved color from an existing palette.</p>
 <h2 id="color-picker"><a name="user-content-color-picker" href="#color-picker" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Color Picker</h2>
-<p>The internal color picker can be launched from the command palette or from the <a href="#color_info">Color Info Panel</a>.  When launched it will use the color under the cursor (if available) as its starting color. The internal color picker is contained inside a tooltip.  It has a color map section at the top where different colors can be selected. It shows various valid CSS formats of the colors at the bottom.  And it shows either rgba channels or hlsa channels; a toggle is available to switch between them.</p>
+<p>The internal color picker can be launched from the view&rsquo;s context menu, the command palette, or from the <a href="#color_info">Color Info Panel</a>.  When launched it will use the color under the cursor (if available) as its starting color. The internal color picker is contained inside a tooltip.  It has a color map section at the top where different colors can be selected. It shows various valid CSS formats of the colors at the bottom.  And it shows either rgba channels or hlsa channels; a toggle is available to switch between them.</p>
 <p><img alt="color picker" src="../images/color_picker.png" /></p>
 <p>The color channels are coarse, but can generally allow you to get close to a color that you like.  As you select colors in the channel the selections will shift revealing more selections until the bounds of the color channel are reached.  If you need finer selections, you can click the label to the left and scrollable tooltip with much finer selections will appear so that you can select the best suited value.</p>
 <p><img alt="fine channel picker" src="../images/fine_channel_picker.png" /></p>
@@ -173,12 +177,19 @@
 <h2 id="color-panel"><a name="user-content-color-panel" href="#color-panel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Color Panel</h2>
 <p>The Color Panel allows you to click a color to insert it at your current color position.</p>
 <p><img alt="color palette" src="../images/colors.png" /></p>
-<p>From the Color Palette, you can also bring up the <a href="#color-delete-panel">Color Delete Panel</a>.</p>
+<p>You can also bring up the <a href="#color-delete-panel">Color Delete Panel</a> from the view&rsquo;s context menu or the command palette.</p>
 <h2 id="color-delete-panel"><a name="user-content-color-delete-panel" href="#color-delete-panel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Color Delete Panel</h2>
 <p>The Color Delete Panel can delete any color from the given palette.  A user simply clicks the color to remove, and it will be removed.</p>
 <p><img alt="color delete palette" src="../images/delete_color.png" /></p>
 <h2 id="settings"><a name="user-content-settings" href="#settings" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Settings</h2>
 <p>Settings for Color Helper are contained within the <code>color_helper.sublime-settings</code> file.</p>
+<h3 id="auto_popup"><a name="user-content-auto_popup" href="#auto_popup" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>auto_popup</h3>
+<p>Enable/disable auto popups.</p>
+<div class="codehilite"><pre>    <span class="c1">// Show popups automatically in configured files.</span>
+    <span class="s2">&quot;auto_popup&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</pre></div>
+
+
 <h3 id="upper_case_hex"><a name="user-content-upper_case_hex" href="#upper_case_hex" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>upper_case_hex</h3>
 <p>When inserting a color from the tooltip, this setting will determine if hex colors get uppercased or lowercased.</p>
 <div class="codehilite"><pre>    <span class="c1">// Upper case hex when inserting</span>
@@ -190,22 +201,6 @@
 <p>Will determine if a HTML color name will be shown for the currently selected colors. If inserting a web color name, transparency will be removed.</p>
 <div class="codehilite"><pre>    <span class="c1">// Use webcolor names when value color matches a webcolor name.</span>
     <span class="s2">&quot;use_webcolor_names&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</pre></div>
-
-
-<h3 id="preferred_format"><a name="user-content-preferred_format" href="#preferred_format" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>preferred_format</h3>
-<p>Controls color format that will be inserted into your document when selecting a color from a palette.  This will only affect colors that contain <strong>no</strong> transparency.</p>
-<div class="codehilite"><pre>    <span class="c1">// Preferred format to output color as:</span>
-    <span class="c1">// (none|hex|rgb|hsl)</span>
-    <span class="s2">&quot;preferred_format&quot;</span><span class="o">:</span> <span class="s2">&quot;hex&quot;</span><span class="p">,</span>
-</pre></div>
-
-
-<h3 id="preferred_alpha_format"><a name="user-content-preferred_alpha_format" href="#preferred_alpha_format" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>preferred_alpha_format</h3>
-<p>Controls color format that will be inserted into your document when selecting a color from a palette.  This will only affect colors <strong>with</strong> transparency.</p>
-<div class="codehilite"><pre>    <span class="c1">// Preferred alpha format to output color as:</span>
-    <span class="c1">// (none|rgba|hsla)</span>
-    <span class="s2">&quot;preferred_alpha_format&quot;</span><span class="o">:</span> <span class="s2">&quot;rgba&quot;</span><span class="p">,</span>
 </pre></div>
 
 
@@ -294,17 +289,185 @@
 </pre></div>
 
 
-<h3 id="supported_syntax"><a name="user-content-supported_syntax" href="#supported_syntax" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>supported_syntax</h3>
-<p><code>supported_syntax</code> is a list of scope rules that will be scanned when <a href="#enable_current_file_palette">enable_current_file_palette</a> is enabled.  If a color is found within these scope rules, it will be indexed for the current file and shown in the Current Colors Panel in the <a href="#palette-panel">Palette Panel</a>.</p>
-<div class="codehilite"><pre>    <span class="c1">// File scoping that will be used when indexing colors in an opened or saved file.</span>
-    <span class="c1">// These are the syntaxes which the auto popup tooltip uses to recogize scannable regions.</span>
-    <span class="s2">&quot;supported_syntax&quot;</span><span class="o">:</span> <span class="p">[</span>
-        <span class="s2">&quot;meta.property-value.css -comment -string&quot;</span><span class="p">,</span>          <span class="c1">// CSS, CSS in HTML etc. (based on: Sublime Default)</span>
-        <span class="s2">&quot;meta.value.css -comment -string&quot;</span><span class="p">,</span>                   <span class="c1">// CSS3, CSS3 in HTML etc. (based on: https://packagecontrol.io/packages/CSS3)</span>
-        <span class="s2">&quot;meta.property-list.css.sass -comment -string&quot;</span><span class="p">,</span>      <span class="c1">// Sass and SCSS (based on: https://packagecontrol.io/packages/Syntax%20Highlighting%20for%20Sass)</span>
-        <span class="s2">&quot;sass-script-maps -variable.other -comment -string&quot;</span><span class="p">,</span> <span class="c1">// Sass and SCSS script maps (based on: https://packagecontrol.io/packages/Syntax%20Highlighting%20for%20Sass)</span>
-        <span class="s2">&quot;meta.tag.inline.any.html string.quoted&quot;</span>             <span class="c1">// HTML attributes (based on: Sublime Default)</span>
-    <span class="p">],</span>
+<h3 id="color_scanning"><a name="user-content-color_scanning" href="#color_scanning" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning</h3>
+<p>Setting to control color scanning which is responsible for both auto-popups and constructing &ldquo;Current File Palette&rdquo;.</p>
+<p><code>color_scanning</code> is an array of rules.  Each rule can target file(s) and enable certain scanning certain scopes for specific colors.  Each rule is a dictionary.  <code>syntax_files</code>, <code>base_scopes</code>, and <code>extensions</code> or used to target the a file for scanning; you can use a specific one, or multiple.</p>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;syntax_files&quot;</span><span class="o">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;syntax_filter&quot;</span><span class="o">:</span> <span class="s2">&quot;whitelist&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;base_scopes&quot;</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s2">&quot;source.css&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;text.html&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;scan_scopes&quot;</span><span class="o">:</span> <span class="p">[</span>
+                <span class="c1">// CSS, CSS in HTML etc. (based on: Sublime Default)</span>
+                <span class="s2">&quot;meta.property-value.css -comment -string&quot;</span><span class="p">,</span>
+                <span class="c1">// CSS3, CSS3 in HTML etc. (based on: https://packagecontrol.io/packages/CSS3)</span>
+                <span class="s2">&quot;meta.value.css -comment -string&quot;</span><span class="p">,</span>
+                <span class="c1">// HTML attributes (based on: Sublime Default)</span>
+                <span class="s2">&quot;meta.tag.inline.any.html string.quoted&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;meta.tag.any.html meta.attribute-with-value.style.html&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;scan_completion_scopes&quot;</span><span class="o">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;extensions&quot;</span><span class="o">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;allowed_colors&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;css3&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;use_hex_argb&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">&quot;compress_hex_output&quot;</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+</pre></div>
+
+
+<h4 id="color_scanningsyntax_files"><a name="user-content-color_scanningsyntax_files" href="#color_scanningsyntax_files" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning.syntax_files</h4>
+<p><code>syntax_files</code> is an array of syntax file (<code>tmLanguage</code> or <code>sublime-syntax</code>)names and are relative to <code>Packages</code> (extensions should be excluded).  They are used to filter views that will be targeted for scanning. Depending on how <a href="#color_scanningsyntax_filter"><code>syntax_filter</code></a> is set, <code>syntax_files</code> will either require the files to be in the list or not in the list.  If <code>syntax_files</code> is set as an empty array, all views will be targeted unless filtered further by other settings.</p>
+<p>Assuming that you have a tmLanguage file <code>Packages/CSS/CSS.tmLanguage</code>:</p>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;syntax_files&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;CSS/CSS&quot;</span><span class="p">],</span>
+</pre></div>
+
+
+<h4 id="color_scanningsyntax_filter"><a name="user-content-color_scanningsyntax_filter" href="#color_scanningsyntax_filter" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning.syntax_filter</h4>
+<p><code>syntax_filter</code> will cause <a href="#color_scanningsyntax_files"><code>syntax_files</code></a> to be treated as either a <code>blacklist</code> or <code>whitelist</code>.  Acceptable values are <code>&quot;blacklist&quot;</code> and <code>&quot;whitelist&quot;</code>.  <code>&quot;whitelist&quot;</code> is the default setting.</p>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;syntax_filter&quot;</span><span class="o">:</span> <span class="s2">&quot;whitelist&quot;</span><span class="p">,</span>
+</pre></div>
+
+
+<h4 id="color_scanningbase_scopes"><a name="user-content-color_scanningbase_scopes" href="#color_scanningbase_scopes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning.base_scopes</h4>
+<p><code>base_scopes</code> is used to target specific file views that are syntax highlighted with a specific base scope.  This allows you to target multiple syntax highlighters that all use the same base scope.  <code>base_scopes</code> is an array; if the array is left empty, all views will be targeted unless filtered further by other settings.</p>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;base_scopes&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;source.css&quot;</span><span class="p">],</span>
+</pre></div>
+
+
+<h4 id="color_scanningextensions"><a name="user-content-color_scanningextensions" href="#color_scanningextensions" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning.extensions</h4>
+<p><code>extensions</code> is used to target specific file views that a file name with the specified extension(s).  <code>extensions</code> is an array; if the array is left empty, all views will be targeted unless filtered further by other settings.  For this setting to work the file usually must exist on disk as views that do not exist on text usually do not have a file name.</p>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;extensions&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;.css&quot;</span><span class="p">],</span>
+</pre></div>
+
+
+<h4 id="color_scanningscan_scopes"><a name="user-content-color_scanningscan_scopes" href="#color_scanningscan_scopes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning.scan_scopes</h4>
+<p><code>scan_scopes</code> is an array of scopes that will be searched for colors.  Scopes in this array contain usually <code>tmTheme</code> scope syntax, so you can include scopes or exclude scopes etc.</p>
+<p>In the example below, we target <code>meta.property-value.css</code>, but only if it is not also scoped as a <code>string</code> or a <code>comment</code>.</p>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;scan_scopes&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;meta.property-value.css -comment -string&quot;</span><span class="p">]</span>
+</pre></div>
+
+
+<h4 id="color_scanningscan_completion_scopes"><a name="user-content-color_scanningscan_completion_scopes" href="#color_scanningscan_completion_scopes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning.scan_completion_scopes</h4>
+<p><code>scan_completion_scopes</code> is an array of scopes that will be searched for certain syntax for color completions.  This is used only if <code>scan_scopes</code> is not sufficient to also capture colors that need to be completed.  For example: sometimes <code>scan_scopes</code> is not broad enough to capture incomplete colors, but we don&rsquo;t want to generally want to scan so broadly when scanning an entire file for complete colors.  Scopes in this array contain usually <code>tmTheme</code> scope syntax, so you can include scopes or exclude scopes etc.</p>
+<p>In the example below, we target <code>source.scss</code> and <code>source.sass</code>, but only if they are not also scoped as <code>string</code> or <code>comment</code>.</p>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;scan_completion_scopes&quot;</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s2">&quot;source.scss -comment -string&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;source.sass -comment -string&quot;</span>
+            <span class="p">],</span>
+</pre></div>
+
+
+<h4 id="color_scanningallowed_colors"><a name="user-content-color_scanningallowed_colors" href="#color_scanningallowed_colors" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning.allowed_colors</h4>
+<p><code>allowed_colors</code> defines which colors will be scanned for in a specific file.  It is an array of strings where each strings specifies a color type or category of colors to scan for.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>webcolors</td>
+<td>CSS3 color names plus CSS4&rsquo;s <code>rebeccapurple</code>.</td>
+</tr>
+<tr>
+<td>hex</td>
+<td>Hex colors in the form of <code>#RRGGBB</code>.</td>
+</tr>
+<tr>
+<td>hex_compressed</td>
+<td>Hex colors in the form of <code>#RGB</code>.</td>
+</tr>
+<tr>
+<td>hexa</td>
+<td>Hex colors with an alpha channel in the form <code>#RRGGBBAA</code> or <code>#AARRGGBB</code> if <code>use_hex_argb</code> is set to <code>true</code>.</td>
+</tr>
+<tr>
+<td>hexa_compressed</td>
+<td>Hex colors with an alpha channel in the form <code>#RGBA</code> or <code>#ARGB</code> if <code>use_hex_argb</code> is set to <code>true</code>.</td>
+</tr>
+<tr>
+<td>rgb</td>
+<td>RGB colors in the form <code>rgb(255, 128, 0)</code> or <code>rgb(100%, 50%, 0%)</code>.</td>
+</tr>
+<tr>
+<td>rgba</td>
+<td>RGBA colors in the form <code>rgb(255, 128, 0, .5)</code> or <code>rgb(100%, 50%, 0%, .5)</code>. It also supports CSS4&rsquo;s alpha as a percentage format: <code>rgb(100%, 50%, 0%, 50%)</code>.</td>
+</tr>
+<tr>
+<td>hsl</td>
+<td>HSL colors in the form `hsl(360, 100%, 50%).</td>
+</tr>
+<tr>
+<td>hsla</td>
+<td>HSLA colors in the form <code>hsla(360, 100%, 50%, .5). It also supports CSS4's alpha as a percentage format:</code>hsla(360, 100%, 50%, 50%)`.</td>
+</tr>
+<tr>
+<td>gray</td>
+<td>CSS4&rsquo;s gray format: <code>gray(255)</code> or <code>gray(100%)</code>.</td>
+</tr>
+<tr>
+<td>graya</td>
+<td>CSS4&rsquo;s gray with alpha format: <code>gray(255, .5)</code> or <code>gray(100%, .5)</code>.  It also supports alpha as a percentage format: <code>gray(100%, 50%)</code>.</td>
+</tr>
+<tr>
+<td>hwb</td>
+<td>CSS4&rsquo;s HWB color format: <code>hwb(360, 50%, 100%)</code>.</td>
+</tr>
+<tr>
+<td>hwba</td>
+<td>CSS4&rsquo;s HWBA color format: <code>hwb(360, 50%, 100%, 5)</code> or <code>hwb(360, 50%, 100%, 50%)</code>.</td>
+</tr>
+<tr>
+<td>css3</td>
+<td>All CSS3 formats: <code>webcolors</code>, <code>hex</code>, <code>hex_compressed</code>, <code>rgb</code>, <code>rgba</code>, <code>hsl</code>, <code>hsla</code>.</td>
+</tr>
+<tr>
+<td>css4</td>
+<td>All CSS4 formats: <code>css3</code>, <code>gray</code>, <code>graya</code>, <code>hwb</code>, <code>hwba</code>, <code>hexa</code>, <code>hexa_compressed</code>.</td>
+</tr>
+<tr>
+<td>all</td>
+<td>All color formats.</td>
+</tr>
+</tbody>
+</table>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;allowed_colors&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;css3&quot;</span><span class="p">]</span>
+</pre></div>
+
+
+<h4 id="color_scanninguse_hex_argb"><a name="user-content-color_scanninguse_hex_argb" href="#color_scanninguse_hex_argb" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning.use_hex_argb</h4>
+<p>When scanning and processing hex rgb colors with alpha channels, process them as and output them with the alpha channel first opposed to at the end.  By default the value is <code>false</code>.</p>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;use_hex_argb&quot;</span><span class="o">:</span> <span class="kc">true</span>
+</pre></div>
+
+
+<h4 id="color_scanningcompress_hex_output"><a name="user-content-color_scanningcompress_hex_output" href="#color_scanningcompress_hex_output" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>color_scanning.compress_hex_output</h4>
+<p>When outputting hex formats compress the color if possible <code>#334455</code> &rarr; <code>#345</code>.  The default is <code>false</code>.</p>
+<div class="codehilite"><pre>    <span class="s2">&quot;color_scanning&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;compress_hex_output&quot;</span><span class="o">:</span> <span class="kc">true</span>
 </pre></div>
               
             </div>
