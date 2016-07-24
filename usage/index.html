@@ -201,6 +201,17 @@
 </pre></div>
 
 
+<h3 id="inline_previews"><a name="user-content-inline_previews" href="#inline_previews" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>inline_previews</h3>
+<p>Enable/disable inline color previews. <code>inline_previews</code> generates an image previews after the identified color in your source file.  You can click the preview to bring up the ColorHelper panel.</p>
+<p><img alt="inline_previews" src="../images/inline_previews.png" /></p>
+<h3 id="inline_preview_offset"><a name="user-content-inline_preview_offset" href="#inline_preview_offset" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>inline_preview_offset</h3>
+<p>ColorHelper does it best to calculate the correct size for inline images, but with some font&rsquo;s or screen resolutions (or for a reason I don&rsquo;t quite understand) it will get it wrong and create an image larger (or maybe smaller) than your line height which may cause an undesirable look.  Set this value to either a positive or negative value which will be applied to the inline preview&rsquo;s image size.</p>
+<div class="codehilite"><pre><span></span>    <span class="c1">// Adjust the size of inline image previews by the offset given.</span>
+    <span class="c1">// Please use either a positive or negative number.</span>
+    <span class="s2">&quot;inline_preview_offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</pre></div>
+
+
 <h3 id="upper_case_hex"><a name="user-content-upper_case_hex" href="#upper_case_hex" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>upper_case_hex</h3>
 <p>When inserting a color from the tooltip, this setting will determine if hex colors get uppercased or lowercased.</p>
 <div class="codehilite"><pre><span></span>    <span class="c1">// Upper case hex when inserting</span>
