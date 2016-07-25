@@ -94,6 +94,8 @@
                 
                     <li><a class="toctree-l4" href="#settings">Settings</a></li>
                 
+                    <li><a class="toctree-l4" href="#multiconf">Multiconf</a></li>
+                
             
             </ul>
         
@@ -212,6 +214,7 @@
 </pre></div>
 
 
+<p>If you need to set this per OS or per host, you can via <a href="#multiconf">multiconf</a>.</p>
 <h3 id="upper_case_hex"><a name="user-content-upper_case_hex" href="#upper_case_hex" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>upper_case_hex</h3>
 <p>When inserting a color from the tooltip, this setting will determine if hex colors get uppercased or lowercased.</p>
 <div class="codehilite"><pre><span></span>    <span class="c1">// Upper case hex when inserting</span>
@@ -248,6 +251,7 @@
 </pre></div>
 
 
+<p>If you need to set this per OS or per host, you can via <a href="#multiconf">multiconf</a>.</p>
 <h3 id="enable_color_picker"><a name="user-content-enable_color_picker" href="#enable_color_picker" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>enable_color_picker</h3>
 <p>Enables the ability to launch the color picker from the tooltip.  By default, the internal color picker will be used.  If you have <a href="https://github.com/weslly">@weslly</a>&lsquo;s <a href="https://packagecontrol.io/packages/ColorPicker">ColorPicker</a> package installed, you can use <a href="#use_color_picker_package">use_color_picker_package</a> to use it instead of the internal color picker.</p>
 <div class="codehilite"><pre><span></span>    <span class="c1">// Enable color picker option.  Will use native color picker</span>
@@ -498,6 +502,37 @@
         <span class="p">{</span>
             <span class="s2">&quot;compress_hex_output&quot;</span><span class="o">:</span> <span class="kc">true</span>
 </pre></div>
+
+
+<h2 id="multiconf"><a name="user-content-multiconf" href="#multiconf" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Multiconf</h2>
+<p>Certain settings that lend them self better to be setting up per OS or per host will be configured to use multiconf.  Multiconf is a library that will parse a setting as a normal setting or a per os and/or per host setting (if configured properly).  For the settings that have this enabled, you can optionally use the format below to specify the setting per OS or per host.</p>
+<p>The optional multiconf format requires a dictionary with a special identifier<br />
+<code>#multiconf#</code>  and a list of dictionaries identified by a qualifier of the form</p>
+<div class="codehilite"><pre><span></span>    <span class="s2">&quot;&lt;qualifier name&gt;:&lt;qualifier value&gt;[;&lt;qualifier name&gt;:&lt;qualifier value&gt;]...&quot;</span>
+</pre></div>
+
+
+<p>For example, the following setting</p>
+<div class="codehilite"><pre><span></span>    <span class="s2">&quot;user_home&quot;</span><span class="o">:</span> <span class="s2">&quot;/home&quot;</span>
+</pre></div>
+
+
+<p>would result in <code>get(&quot;user_home&quot;)</code> returning the value &ldquo;/home&rdquo; but it could also<br />
+be replaced with</p>
+<div class="codehilite"><pre><span></span>    <span class="s2">&quot;user_home&quot;</span><span class="o">:</span>  <span class="p">{</span>
+                    <span class="s2">&quot;#multiconf#&quot;</span><span class="o">:</span> <span class="p">[</span>
+                        <span class="p">{</span><span class="s2">&quot;os:windows&quot;</span><span class="o">:</span> <span class="s2">&quot;C:\\Users&quot;</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s2">&quot;os:linux;host:his_pc&quot;</span><span class="o">:</span> <span class="s2">&quot;/home&quot;</span><span class="p">},</span>
+                        <span class="p">{</span><span class="s2">&quot;os:linux;host:her_pc&quot;</span><span class="o">:</span> <span class="s2">&quot;/home/her/special&quot;</span><span class="p">}</span>
+                    <span class="p">]</span>
+    <span class="p">}</span>
+</pre></div>
+
+
+<p>Now the same configuration file will provide different values depending on the<br />
+machine it&rsquo;s on. On an MS Windows machine the value returned by <code>get</code> will be<br />
+&ldquo;C:\Users&rdquo;, and on a Linux machine with the host name &lsquo;his_pc&rsquo; the value will be<br />
+&ldquo;/home&rdquo;, etc.</p>
               
             </div>
           </div>
