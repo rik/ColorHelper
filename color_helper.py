@@ -829,7 +829,7 @@ class ColorHelperCommand(sublime_plugin.TextCommand):
             rules = util.get_rules(self.view)
             use_hex_argb = rules.get("use_hex_argb", False) if rules else False
             allowed_colors = rules.get('allowed_colors', []) if rules else util.ALL
-            for m in util.COLOR_RE.finditer(bfr):
+            for m in util.get_color_regex().finditer(bfr):
                 if ref >= m.start(0) and ref < m.end(0):
                     if m.group('hex_compressed') and 'hex_compressed' not in allowed_colors:
                         continue
@@ -1119,7 +1119,7 @@ class ChPreview(object):
             colors = []
             for src in source:
                 text = view.substr(src)
-                for m in util.COLOR_RE.finditer(text):
+                for m in util.get_color_regex().finditer(text):
                     if str(src.begin() + m.start(0)) in preview:
                         continue
                     elif not visible_region.contains(sublime.Region(src.begin() + m.start(0), src.begin() + m.end(0))):
@@ -1254,7 +1254,7 @@ class ChPreview(object):
                     if end > view.size():
                         end = view.size()
                     text = view.substr(sublime.Region(start, end))
-                    m = util.COLOR_RE.search(text)
+                    m = util.get_color_regex().search(text)
                     if (
                         not m or
                         not m.group(v[2]) or
@@ -1594,7 +1594,7 @@ class ChFileIndexThread(threading.Thread):
         """Index colors in file."""
 
         colors = set()
-        for m in util.COLOR_RE.finditer(self.source):
+        for m in util.get_color_regex().finditer(self.source):
             if self.abort:
                 break
             if m.group('hex_compressed') and not self.color_okay('hex_compressed'):
@@ -1707,7 +1707,7 @@ class ChThread(threading.Thread):
                     end = visible.end()
                 bfr = view.substr(sublime.Region(start, end))
                 ref = point - start
-                for m in util.COLOR_ALL_RE.finditer(bfr):
+                for m in util.get_color_regex(full=True).finditer(bfr):
                     if ref >= m.start(0) and ref < m.end(0):
                         if (
                             (m.group('hexa_compressed') and self.color_okay(allowed_colors, 'hexa_compressed')) or
