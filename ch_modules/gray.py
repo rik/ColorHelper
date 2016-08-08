@@ -14,6 +14,7 @@ class Gray(ch_plugin.Color):
     """Gray object."""
 
     keys = ('gray', 'graya')
+    incomplete_keys = ('gray_open',)
 
     def get_keys(self):
         return self.keys

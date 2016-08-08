@@ -171,6 +171,7 @@ class WebColors(ch_plugin.Color):
     """Web Colors."""
 
     keys = ('webcolors',)
+    incomplete_keys = tuple()
 
     def get_keys(self):
         return self.keys

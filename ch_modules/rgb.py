@@ -11,6 +11,7 @@ class Rgb(ch_plugin.Color):
     """RGB object."""
 
     keys = ('rgb', 'rgba')
+    incomplete_keys = ('rgb_open', 'rgba_open')
 
     def get_keys(self):
         return self.keys

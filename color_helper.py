@@ -831,31 +831,7 @@ class ColorHelperCommand(sublime_plugin.TextCommand):
             allowed_colors = rules.get('allowed_colors', []) if rules else util.ALL
             for m in util.get_color_regex().finditer(bfr):
                 if ref >= m.start(0) and ref < m.end(0):
-                    if m.group('hex_compressed') and 'hex_compressed' not in allowed_colors:
-                        continue
-                    elif m.group('hexa_compressed') and 'hexa_compressed' not in allowed_colors:
-                        continue
-                    elif m.group('hex') and 'hex' not in allowed_colors:
-                        continue
-                    elif m.group('hexa') and 'hexa' not in allowed_colors:
-                        continue
-                    elif m.group('rgb') and 'rgb' not in allowed_colors:
-                        continue
-                    elif m.group('rgba') and 'rgba' not in allowed_colors:
-                        continue
-                    elif m.group('gray') and 'gray' not in allowed_colors:
-                        continue
-                    elif m.group('graya') and 'graya' not in allowed_colors:
-                        continue
-                    elif m.group('hsl') and 'hsl' not in allowed_colors:
-                        continue
-                    elif m.group('hsla') and 'hsla' not in allowed_colors:
-                        continue
-                    elif m.group('hwb') and 'hwb' not in allowed_colors:
-                        continue
-                    elif m.group('hwba') and 'hwba' not in allowed_colors:
-                        continue
-                    elif m.group('webcolors') and 'webcolors' not in allowed_colors:
+                    if not util.is_allowed_color(m, allowed_colors):
                         continue
                     color, alpha, alpha_dec = util.translate_color(m, bool(use_hex_argb))
                     break
@@ -1124,59 +1100,8 @@ class ChPreview(object):
                         continue
                     elif not visible_region.contains(sublime.Region(src.begin() + m.start(0), src.begin() + m.end(0))):
                         continue
-                    elif m.group('hex_compressed'):
-                        if not self.color_okay('hex_compressed'):
-                            continue
-                        color_type = 'hex_compressed'
-                    elif m.group('hexa_compressed'):
-                        if not self.color_okay('hexa_compressed'):
-                            continue
-                        color_type = 'hexa_compressed'
-                    elif m.group('hex'):
-                        if not self.color_okay('hex'):
-                            continue
-                        color_type = 'hex'
-                    elif m.group('hexa'):
-                        if not self.color_okay('hexa'):
-                            continue
-                        color_type = 'hexa'
-                    elif m.group('rgb'):
-                        if not self.color_okay('rgb'):
-                            continue
-                        color_type = 'rgb'
-                    elif m.group('rgba'):
-                        if not self.color_okay('rgba'):
-                            continue
-                        color_type = 'rgba'
-                    elif m.group('gray'):
-                        if not self.color_okay('gray'):
-                            continue
-                        color_type = 'gray'
-                    elif m.group('graya'):
-                        if not self.color_okay('graya'):
-                            continue
-                        color_type = 'graya'
-                    elif m.group('hsl'):
-                        if not self.color_okay('hsl'):
-                            continue
-                        color_type = 'hsl'
-                    elif m.group('hsla'):
-                        if not self.color_okay('hsla'):
-                            continue
-                        color_type = 'hsla'
-                    elif m.group('hwb'):
-                        if not self.color_okay('hwb'):
-                            continue
-                        color_type = 'hwb'
-                    elif m.group('hwba'):
-                        if not self.color_okay('hwba'):
-                            continue
-                        color_type = 'hwba'
-                    elif m.group('webcolors'):
-                        if not self.color_okay('webcolors'):
-                            continue
-                        color_type = 'webcolors'
-                    else:
+                    color_type = util.is_allowed_color(m, self.allowed_colors)
+                    if color_type is None:
                         continue
                     color, alpha, alpha_dec = util.translate_color(m, use_hex_argb)
                     color += alpha if alpha is not None else 'ff'
@@ -1583,7 +1508,10 @@ class ChFileIndexThread(threading.Thread):
         """Thread loop."""
 
         if self.source:
-            self.index_colors()
+            try:
+                self.index_colors()
+            except Exception:
+                pass
 
     def color_okay(self, color_type):
         """Check if color is allowed."""
@@ -1597,31 +1525,7 @@ class ChFileIndexThread(threading.Thread):
         for m in util.get_color_regex().finditer(self.source):
             if self.abort:
                 break
-            if m.group('hex_compressed') and not self.color_okay('hex_compressed'):
-                continue
-            elif m.group('hexa_compressed') and not self.color_okay('hexa_compressed'):
-                continue
-            elif m.group('hex') and not self.color_okay('hex'):
-                continue
-            elif m.group('hexa') and not self.color_okay('hexa'):
-                continue
-            elif m.group('rgb') and not self.color_okay('rgb'):
-                continue
-            elif m.group('rgba') and not self.color_okay('rgba'):
-                continue
-            elif m.group('gray') and not self.color_okay('gray'):
-                continue
-            elif m.group('graya') and not self.color_okay('graya'):
-                continue
-            elif m.group('hsl') and not self.color_okay('hsl'):
-                continue
-            elif m.group('hsla') and not self.color_okay('hsla'):
-                continue
-            elif m.group('hwb') and not self.color_okay('hwb'):
-                continue
-            elif m.group('hwba') and not self.color_okay('hwba'):
-                continue
-            elif m.group('webcolors') and not self.color_okay('webcolors'):
+            if not util.allowed_colors(m, self.allowed_colors):
                 continue
             color, alpha, alpha_dec = util.translate_color(m, self.use_hex_argb)
             color += alpha if alpha is not None else 'ff'
@@ -1709,54 +1613,14 @@ class ChThread(threading.Thread):
                 ref = point - start
                 for m in util.get_color_regex(full=True).finditer(bfr):
                     if ref >= m.start(0) and ref < m.end(0):
-                        if (
-                            (m.group('hexa_compressed') and self.color_okay(allowed_colors, 'hexa_compressed')) or
-                            (m.group('hex_compressed') and self.color_okay(allowed_colors, 'hex_compressed')) or
-                            (m.group('hexa') and self.color_okay(allowed_colors, 'hexa')) or
-                            (m.group('hex') and self.color_okay(allowed_colors, 'hex')) or
-                            (m.group('rgb') and self.color_okay(allowed_colors, 'rgb')) or
-                            (m.group('rgba') and self.color_okay(allowed_colors, 'rgba')) or
-                            (m.group('gray') and self.color_okay(allowed_colors, 'gray')) or
-                            (m.group('graya') and self.color_okay(allowed_colors, 'graya')) or
-                            (m.group('hsl') and self.color_okay(allowed_colors, 'hsl')) or
-                            (m.group('hsla') and self.color_okay(allowed_colors, 'hsla')) or
-                            (m.group('hwb') and self.color_okay(allowed_colors, 'hwb')) or
-                            (m.group('hwba') and self.color_okay(allowed_colors, 'hwba')) or
-                            (m.group('webcolors') and self.color_okay(allowed_colors, 'webcolors'))
-                        ):
+                        if util.is_allowed_color(m, allowed_colors):
                             info = True
                             execute = True
-                        break
+                            break
                     elif ref == m.end(0):
-                        if (
-                            (
-                                m.group('hash') and (
-                                    self.color_okay(allowed_colors, 'hex') or
-                                    self.color_okay(allowed_colors, 'hexa') or
-                                    self.color_okay(allowed_colors, 'hex_compressed') or
-                                    self.color_okay(allowed_colors, 'hexa_compressed')
-                                )
-                            ) or
-                            (m.group('rgb_open') and self.color_okay(allowed_colors, 'rgb')) or
-                            (m.group('rgba_open') and self.color_okay(allowed_colors, 'rgba')) or
-                            (m.group('hsl_open') and self.color_okay(allowed_colors, 'hsl')) or
-                            (m.group('hsla_open') and self.color_okay(allowed_colors, 'hsla')) or
-                            (
-                                m.group('hwb_open') and
-                                (
-                                    self.color_okay(allowed_colors, 'hwb') or
-                                    self.color_okay(allowed_colors, 'hwba')
-                                )
-                            ) or
-                            (
-                                m.group('gray_open') and (
-                                    self.color_okay(allowed_colors, 'gray') or
-                                    self.color_okay(allowed_colors, 'graya')
-                                )
-                            )
-                        ):
+                        if util.is_allowed_incomplete_color(m, allowed_colors):
                             execute = True
-                        break
+                            break
                 if execute:
                     view.run_command('color_helper', {"mode": "palette" if not info else "info", "auto": True})
             if (
@@ -1794,6 +1658,7 @@ def settings_reload():
     global reload_flag
     reload_flag = True
     ch_last_updated = time()
+    util.load_modules()
     setup_previews()
 
 

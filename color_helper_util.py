@@ -41,8 +41,8 @@ TAG_STYLE_ATTR_RE = re.compile(
     re.DOTALL
 )
 
-color_re = None
-color_all_re = None
+color_re = re.compile(r'[^\s\S]')
+color_all_re = re.compile(r'[^\s\S]')
 
 ADD_CSS = dedent(
     '''
@@ -155,6 +155,29 @@ def save_project_palettes(window, palettes):
     window.set_project_data(data)
 
 
+def load_modules():
+    """Load modules."""
+
+    global color_re
+    global color_all_re
+
+    ch_plugin.load_modules()
+
+    regex = []
+    for plugin in ch_plugin.get_plugins().values():
+        r = plugin.get_regex()
+        if r:
+            regex.append(r)
+    color_re = re.compile(r'(?x)(?i)(?<![@#$.\-_])(?:%s)(?![@#$.\-_])' % '|'.join(regex))
+
+    incomplete_regex = []
+    for plugin in ch_plugin.get_plugins().values():
+        r = plugin.get_incomplete_regex()
+        if r:
+            incomplete_regex.append(r)
+    color_all_re = re.compile(r'(?x)(?i)(?<![@#$.\-_])(?:%s)(?![@#$.\-_])' % '|'.join(regex + incomplete_regex))
+
+
 def get_palettes():
     """Get palettes."""
 
@@ -179,24 +202,36 @@ def get_project_folders(window):
 
 def get_color_regex(full=False):
     """Get color regex."""
-    global color_re
-    global color_all_re
 
-    if color_re is None or color_all_re is None:
-        regex = []
-        for plugin in ch_plugin.get_plugins().values():
-            r = plugin.get_regex()
-            if r:
-                regex.append(r)
-        color_re = re.compile(r'(?x)(?i)(?<![@#$.\-_])(?:%s)(?![@#$.\-_])' % '|'.join(regex))
-
-        incomplete_regex = []
-        for plugin in ch_plugin.get_plugins().values():
-            r = plugin.get_incomplete_regex()
-            if r:
-                incomplete_regex.append(r)
-        color_re = re.compile(r'(?x)(?i)(?<![@#$.\-_])(?:%s)(?![@#$.\-_])' % '|'.join(regex + incomplete_regex))
     return color_all_re if full else color_re
+
+
+def is_allowed_color(m, allowed):
+    """Check if color is allowed."""
+
+    for plugin in ch_plugin.get_plugins().values():
+        for key in plugin.keys:
+            try:
+                if m.group(key) and key in allowed:
+                    return key
+            except Exception:
+                pass
+    return None
+
+
+def is_allowed_incomplete_color(m, allowed):
+    """Check if incomplete color is allowed."""
+
+    for plugin in ch_plugin.get_plugins().values():
+        for key in plugin.incomplete_keys:
+            try:
+                if m.group(key):
+                    for key2 in plugin.keys:
+                        if key2 in allowed:
+                            return key
+            except Exception:
+                pass
+    return None
 
 
 def translate_color(m, use_hex_argb=False):

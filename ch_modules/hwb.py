@@ -11,6 +11,7 @@ class Hwb(ch_plugin.Color):
     """HWB object."""
 
     keys = ('hwb', 'hwba')
+    incomplete_keys = ('hwb_open',)
 
     def get_keys(self):
         return self.keys
@@ -23,7 +24,7 @@ class Hwb(ch_plugin.Color):
             )\s*\)) |
             \b(?P<hwba>hwb\(\s*(?P<hwba_content>
                 %(float)s\s*,\s*(?:%(percent)s\s*,\s*){2}(?:%(percent)s|%(float)s)
-            )\s*\)) |
+            )\s*\))
         ''' % COLOR_PARTS
 
     def get_incomplete_regex(self):

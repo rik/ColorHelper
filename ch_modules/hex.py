@@ -8,7 +8,8 @@ HEX_COMPRESS_RE = re.compile(r'(?i)^#([0-9a-f])\1([0-9a-f])\2([0-9a-f])\3(?:([0-
 class Hex(ch_plugin.Color):
     """Hex object."""
 
-    keys = ('hex', 'hexa')
+    keys = ('hex', 'hexa', 'hex_compressed', 'hexa_compressed')
+    incomplete_keys = ('hash',)
 
     def get_keys(self):
         return self.keys

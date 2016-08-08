@@ -75,17 +75,13 @@ def load_modules():
     )
     for plugin in plugins:
         module = _import_module(plugin, loaded_plugins)
-        print(dir(module))
         for type_name in module.__dict__:
-            print(type_name)
             try:
                 t = module.__dict__[type_name]
                 if issubclass(t, Color):
                     loaded_plugins[plugin] = t()
-            except Exception as e:
-                print(e)
+            except Exception:
                 pass
-    print(loaded_plugins)
 
 
 def _import_module(module_name, loaded=None):
@@ -102,9 +98,6 @@ def _import_module(module_name, loaded=None):
     else:
         path_name = os.path.join("Packages", os.path.normpath(module_name.replace('.', '/')))
     path_name += ".py"
-    # if module_name in loaded:
-    #     pass
-        # module = sys.modules[module_name]
     if module_name not in loaded:
         module = imp.new_module(module_name)
         sys.modules[module_name] = module
@@ -148,6 +141,3 @@ class Color(object):
 
     def format(self, color, **kwargs):
         return color
-
-
-load_modules()
