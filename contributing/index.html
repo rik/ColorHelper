@@ -170,6 +170,7 @@
 <li>Errors in console.</li>
 <li>Detailed description of the problem.</li>
 <li>Examples for reproducing the error.  You can post pictures, but if specific text or code is required to reproduce the issue, please provide the text in a plain text format for easy copy/paste.</li>
+<li>Provide links to 3<sup>rd</sup> party syntax highlighting package you are using if applicable.</li>
 </ul>
 <p>The more info provided, the greater the chance someone will take the time to answer, implement, or fix the issue.</p>
 </li>
@@ -199,13 +200,13 @@
 <p>As <abbr title="Sublime Text 3">ST3</abbr> is the only current, actively supported version, Python 3.3 must be used to validate the tests.</p>
 </li>
 <li>
-<p>Unit tests are run with <code>nose</code>.  You can install nose via:</p>
-<div class="codehilite"><pre><span></span>pip install nose
+<p>Unit tests are run with <code>pytest</code>.  You can install pytest via:</p>
+<div class="codehilite"><pre><span></span>pip install pytest
 </pre></div>
 
 
 <p>The tests should be run from the root folder of the plugin by using the following command:</p>
-<div class="codehilite"><pre><span></span>nosetests .
+<div class="codehilite"><pre><span></span>py.test .
 </pre></div>
 
 

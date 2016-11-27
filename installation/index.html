@@ -63,6 +63,8 @@
                 
                     <li><a class="toctree-l4" href="#package-control">Package Control</a></li>
                 
+                    <li><a class="toctree-l4" href="#manual-installation">Manual Installation</a></li>
+                
                     <li><a class="toctree-l4" href="#git-cloning">Git Cloning</a></li>
                 
             
@@ -149,18 +151,202 @@
 <p>Enjoy!</p>
 </li>
 </ol>
-<h2 id="git-cloning"><a name="user-content-git-cloning" href="#git-cloning" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Git Cloning</h2>
+<h2 id="manual-installation"><a name="user-content-manual-installation" href="#manual-installation" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Manual Installation</h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This is not the recommended way to install ColorHelper for the casual user as it requires the user to know which branch to install, know how to use git, and <strong>will not</strong> get automatically updated.</p>
-<p>If you are forking for a pull request, this is the way to go, just replace the official repository with the link for your fork.</p>
+<p>This is not the recommended way to install BracketHighlighter for the average user.  Installing this way <strong>will not</strong> get automatically updated.</p>
+<p>If you are forking for a pull request, you should <strong>just</strong> clone BH and run Package Control&rsquo;s <code>Satisfy Dependency</code> command to get all the dependencies.</p>
 </div>
+<p>For those who want to install ColorHelper without package control, here are the steps.  It understood that some people for what ever reason will prefer manually and may even have legitimate reasons to do so.  When going this route, you will have to keep all the packages updated yourself.</p>
+<hr />
+<ol>
+<li>
+<p>Download the latest releases of the following dependencies and unpack or git clone in the <code>Packages</code> folder as shown below:</p>
+<ul>
+<li><a href="https://bitbucket.org/teddy_beer_maniac/sublime-text-dependency-markupsafe">https://bitbucket.org/teddy_beer_maniac/sublime-text-dependency-markupsafe</a> -&gt; markupsafe</li>
+<li><a href="https://bitbucket.org/teddy_beer_maniac/sublime-text-dependency-jinja2">https://bitbucket.org/teddy_beer_maniac/sublime-text-dependency-jinja2</a> -&gt; python-jinja2</li>
+<li><a href="https://github.com/packagecontrol/pygments">https://github.com/packagecontrol/pygments</a> -&gt; pygments</li>
+<li><a href="https://github.com/facelessuser/sublime-markdown-popups">https://github.com/facelessuser/sublime-markdown-popups</a> -&gt; mdpopups</li>
+<li><a href="https://github.com/facelessuser/sublime-markdown">https://github.com/facelessuser/sublime-markdown</a> -&gt; python-markdown</li>
+</ul>
+</li>
+<li>
+<p>Download and unpack or git clone the latest ColorHelper release and unpack as <code>ColorHelper</code>:</p>
+<ul>
+<li><a href="https://github.com/facelessuser/ColorHelper">https://github.com/facelessuser/ColorHelper</a> -&gt; ColorHelper</li>
+</ul>
+</li>
+<li>
+<p>Create a folder under <code>Packages</code> called <code>00-dependencies</code> and under that folder create a file called <code>00-dependencies.py</code>:</p>
+<p>Copy the following code to <code>00-dependencies.py</code> (this code was taken from Package Control):</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">dirname</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">windll</span><span class="p">,</span> <span class="n">create_unicode_buffer</span>
+
+<span class="kn">import</span> <span class="nn">sublime</span>
+
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,):</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">path</span>
+
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">path</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;sys_path.py&#39;</span><span class="p">:</span>
+        <span class="n">pc_package_path</span> <span class="o">=</span> <span class="n">dirname</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+    <span class="c1"># When loaded as a .sublime-package file, the filename ends up being</span>
+    <span class="c1"># Package Control.sublime-package/Package Control.package_control.sys_path</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pc_package_path</span> <span class="o">=</span> <span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+    <span class="n">st_version</span> <span class="o">=</span> <span class="s1">u&#39;3&#39;</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getfilesystemencoding</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">path</span>
+
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getfilesystemencoding</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">path</span>
+
+    <span class="n">pc_package_path</span> <span class="o">=</span> <span class="n">decode</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+    <span class="n">st_version</span> <span class="o">=</span> <span class="s1">u&#39;2&#39;</span>
+
+
+<span class="n">st_dir</span> <span class="o">=</span> <span class="n">dirname</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">pc_package_path</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds an entry to the beginning of sys.path, working around the fact that</span>
+<span class="sd">    Python 2.6 can&#39;t import from non-ASCII paths on Windows.</span>
+
+<span class="sd">    :param path:</span>
+<span class="sd">        A unicode string of a folder, zip file or sublime-package file to</span>
+<span class="sd">        add to the path</span>
+
+<span class="sd">    :param first:</span>
+<span class="sd">        If the path should be added at the beginning</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+        <span class="c1"># Work around unicode path import issue on Windows with Python 2.6</span>
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">create_unicode_buffer</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">windll</span><span class="o">.</span><span class="n">kernel32</span><span class="o">.</span><span class="n">GetShortPathNameW</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="n">enc_path</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">enc_path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">enc_path</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">enc_path</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">enc_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">enc_path</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes a path from sys.path if it is present</span>
+
+<span class="sd">    :param path:</span>
+<span class="sd">        A unicode string of a folder, zip file or sublime-package file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">encode</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">create_unicode_buffer</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">windll</span><span class="o">.</span><span class="n">kernel32</span><span class="o">.</span><span class="n">GetShortPathNameW</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">encode</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+
+<span class="k">def</span> <span class="nf">generate_dependency_paths</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Accepts a dependency name and generates a dict containing the three standard</span>
+<span class="sd">    import paths that are valid for the current machine.</span>
+
+<span class="sd">    :param name:</span>
+<span class="sd">        A unicode string name of the dependency</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        A dict with the following keys:</span>
+<span class="sd">         - &#39;ver&#39;</span>
+<span class="sd">         - &#39;plat&#39;</span>
+<span class="sd">         - &#39;arch&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">packages_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">st_dir</span><span class="p">,</span> <span class="s1">u&#39;Packages&#39;</span><span class="p">)</span>
+    <span class="n">dependency_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">packages_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="n">ver</span> <span class="o">=</span> <span class="s1">u&#39;st</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">st_version</span>
+    <span class="n">plat</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">platform</span><span class="p">()</span>
+    <span class="n">arch</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">arch</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;all&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dependency_dir</span><span class="p">,</span> <span class="s1">&#39;all&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;ver&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dependency_dir</span><span class="p">,</span> <span class="n">ver</span><span class="p">),</span>
+        <span class="s1">&#39;plat&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dependency_dir</span><span class="p">,</span> <span class="s1">u&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ver</span><span class="p">,</span> <span class="n">plat</span><span class="p">)),</span>
+        <span class="s1">&#39;arch&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dependency_dir</span><span class="p">,</span> <span class="s1">u&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ver</span><span class="p">,</span> <span class="n">plat</span><span class="p">,</span> <span class="n">arch</span><span class="p">))</span>
+    <span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">add_dependency</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Accepts a dependency name and automatically adds the appropriate path</span>
+<span class="sd">    to sys.path, if the dependency has a path for the current platform and</span>
+<span class="sd">    architecture.</span>
+
+<span class="sd">    :param name:</span>
+<span class="sd">        A unicode string name of the dependency</span>
+
+<span class="sd">    :param first:</span>
+<span class="sd">        If the path should be added to the beginning of the list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dep_paths</span> <span class="o">=</span> <span class="n">generate_dependency_paths</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">dep_paths</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">encode</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">)</span>
+
+
+<span class="n">add_dependency</span><span class="p">(</span><span class="s1">&#39;pygments&#39;</span><span class="p">)</span>
+<span class="n">add_dependency</span><span class="p">(</span><span class="s1">&#39;markupsafe&#39;</span><span class="p">)</span>
+<span class="n">add_dependency</span><span class="p">(</span><span class="s1">&#39;python-markdown&#39;</span><span class="p">)</span>
+<span class="n">add_dependency</span><span class="p">(</span><span class="s1">&#39;python-jinja2&#39;</span><span class="p">)</span>
+<span class="n">add_dependency</span><span class="p">(</span><span class="s1">&#39;mdpopups&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Restart and enjoy.</p>
+</li>
+</ol>
+<h2 id="git-cloning"><a name="user-content-git-cloning" href="#git-cloning" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Git Cloning</h2>
 <ol>
 <li>
 <p>Quit Sublime Text.</p>
 </li>
 <li>
-<p>Open a terminal:</p>
+<p>Open a terminal and enter the following.  For dependencies replace the url with the appropriate URL, and the appropriate folder to check it out to:</p>
 <div class="codehilite"><pre><span></span>cd /path/to/Sublime Text 3/Packages
 git clone https://github.com/facelessuser/ColorHelper.git ColorHelper
 </pre></div>
